@@ -611,7 +611,7 @@ EOF
 
     cat > "$work/Main.qml" <<'QML_EOF'
 import QtQuick 2.15
-import Qt5Compat.GraphicalEffects
+import Qt5Compat.GraphicalEffects 1.0
 
 Item {
     id: root
