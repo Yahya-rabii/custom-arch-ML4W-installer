@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><!-- frame-runtime --><!-- base href="https://19d3fc7a-40f6-44ac-84f0-97b7d7d0fddf.frame.claudeusercontent.com/_f/1787749526-14c6/" --><script>window.__FRAME_PREAMBLE={"v":1,"capabilities":{"artifact":"artifact.oqIe8shs.js","assets":"assets.DBUJcvq_.js","comments":"comments.GLuHR3zP.js","db":"db.CRhVHzSt.js","downloads":"downloads.C3GSvEDP.js","embed":"embed.CxGAyc-v.js","mcp":"mcp.Bvma3qD7.js","network":"network.B5UA9Su4.js","permissions":"permissions.BNySkLV5.js","room":"room.DE7EMui-.js","sample":"sample.BW2Uysoh.js","self":"artifact.oqIe8shs.js","user":"user.BpKav-Rf.js"},"transforms":"_transforms.CQm3TZ9K.js","comments":"_comments.PBVy184F.js","translate":"_translate.5HCW4BJh.js"}</script><script>(function(){"use strict";var Z=["light","dark","system"],J=/^[A-Za-z0-9_-]{1,64}$/,z=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,Q=new Set(["class","hidden","value","checked"]);function ee(e){const t=e.toLowerCase();return t.startsWith("data-")||t.startsWith("aria-")||Q.has(t)}var Me="http://www.w3.org/1999/xhtml",te="http://www.w3.org/2000/svg",re=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),ne=new Set(["script","style"]);function oe(e){const t=e.localName.toLowerCase();return e.namespaceURI==="http://www.w3.org/1999/xhtml"?!re.has(t):e.namespaceURI===te?!ne.has(t):!1}var se=new Set(["html","head","body","frameset"]);function ae(e){return e.namespaceURI==="http://www.w3.org/1999/xhtml"&&se.has(e.localName)}function ie(e){if(e===null||typeof e!="object")return!1;const t=e;if(typeof t.target!="string"||!J.test(t.target)||t.text!==void 0&&typeof t.text!="string")return!1;if(t.attrsSet!==void 0){if(t.attrsSet===null||typeof t.attrsSet!="object")return!1;for(const[r,n]of Object.entries(t.attrsSet))if(!z.test(r)||typeof n!="string")return!1}if(t.attrsRemoved!==void 0){if(!Array.isArray(t.attrsRemoved))return!1;for(const r of t.attrsRemoved)if(typeof r!="string"||!z.test(r))return!1}return!0}function ce(e,t){if(e===null||typeof e!="object")return!1;const{seq:r,elements:n}=e;if(typeof r!="number"||!Number.isSafeInteger(r)||!Array.isArray(n)||n.length===0||n.length>64)return!1;for(let s=0;s<n.length;s++)if(!t(n[s]))return!1;return!0}function le(e){return e===null||typeof e!="object"?!1:ce(e.__frame_patch,ie)}function ue(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_init;return t!==null&&typeof t=="object"}function fe(e){return e!==null&&typeof e=="object"&&e.__frame_size_poke===!0}function pe(e){if(e===null||typeof e!="object")return!1;const t=e.__frame_theme;if(t===null||typeof t!="object")return!1;const r=t.theme;return typeof r=="string"&&Z.includes(r)}var g=/^[\w.-]+\.js$/;function de(e,t,r){return r?"inert":typeof t=="string"&&g.test(t)?e?[t]:"inert":e?"inert":"framed"}function me(){return{post(e,t){parent.postMessage(e,t)},on(e){const t=r=>{r.source===parent&&e(r.data,r.origin)};return addEventListener("message",t),()=>removeEventListener("message",t)}}}function he(){return{post:()=>{},on:()=>()=>{}}}var O="__frame_scroll",_e=150,ve=310,ye=160,we=3e4;function be(){let e=0,t=!1,r=!1,n=!1,s=0,a=null;const u=i=>{try{sessionStorage.setItem(O,JSON.stringify({y:i}))}catch{}},f=()=>{if(clearTimeout(e),a===null)return;const i=a;a=null,u(i)},R=()=>{if(t){t=!1;return}r=!0,a=scrollY,clearTimeout(e),e=setTimeout(f,_e)};try{addEventListener("scroll",R,{passive:!0}),addEventListener("pagehide",f)}catch{}const v=()=>{let i;try{i=sessionStorage.getItem(O)}catch{return null}if(i===null)return null;let m;try{m=JSON.parse(i)}catch{m=null}const l=m?.y;if(!(typeof l=="number"&&Number.isFinite(l)&&l>=0)){try{sessionStorage.removeItem(O)}catch{}return null}return l};let S=!1;const h=i=>{try{const m=scrollY;scrollTo({top:i,left:0,behavior:"instant"}),s=i,n=!0,clearTimeout(e),a=null,u(i);const l=scrollY;l!==m&&(t=!0),l!==i&&!S&&(S=!0,addEventListener("load",()=>{try{if(scrollY===l){const k=v();h(k!==null?k:s)}}catch{}},{once:!0}))}catch{}},y=()=>{try{return!!location.hash}catch{return!0}};let o=!1;const p=()=>{try{if(o||innerWidth>ve||innerHeight>ye)return;o=!0;const i=Date.now(),m=()=>{try{removeEventListener("resize",m)}catch{}if(Date.now()-i>we||r||y())return;const l=v();h(l!==null?l:s)};addEventListener("resize",m)}catch{}};let _=!1,w=!1;return{restore(){if(_||(_=!0,y()))return;const i=v();i!==null&&(h(i),p())},promoted(){if(w||(w=!0,y()))return;const i=v();i!==null?(h(i),p()):n&&h(s)}}}function Ee(e,t,r){let n=null;try{n=window.trustedTypes?.createPolicy("frame-runtime",{createScriptURL:f=>f})??null}catch{}const s=window.Worker,a=s?.prototype,u=Object.freeze({Worker:s,workerOn:a?.addEventListener,workerPost:a?.postMessage,workerTerminate:a?.terminate,fetch:window.fetch.bind(window),preventDefault:Event.prototype.preventDefault,policy:n});t(e).then(f=>f?.bootTopLevel?f.bootTopLevel(u,{settle:r}):r()).catch(r)}var Oe="modulepreload",Ce=function(e){return"/"+e},je={},ge=function(t,r,n){let s=Promise.resolve();function a(u){const f=new Event("vite:preloadError",{cancelable:!0});if(f.payload=u,window.dispatchEvent(f),!f.defaultPrevented)throw u}return s.then(u=>{for(const f of u||[])f.status==="rejected"&&a(f.reason);return t().catch(a)})},Ae=window===top,H=Object.getOwnPropertyDescriptor(window,"claude"),T=de(Ae,window.__FRAME_PREAMBLE?.topLevel,H?.writable===!1),C=typeof T=="object"&&T[0],d=C?he():me();(function(){const e=Object.defineProperty,t=globalThis,r=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let n=0;for(let s=0;s<r.length;s++){const a=r[s];try{e(t,a,{value:void 0,writable:!1,configurable:!1})}catch{try{delete t[a]}catch{}try{e(t,a,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof t[a]=="function"&&n++}if(n&&T==="framed")try{d.post({__frame_rtc_lockdown_failed:n},"*")}catch{}})();var Re=1e4,Se=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function q(e){for(const t of Se)if(t.endsWith(":*"))try{const r=new URL(e);if(`${r.protocol}//${r.hostname}:*`===t)return!0}catch{}else if(e===t)return!0;return!1}var L=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),j=window.__FRAME_PREAMBLE?.transforms,N=window.__FRAME_PREAMBLE?.comments,I=window.__FRAME_PREAMBLE?.translate;function A(e){return ge(()=>import("/_runtime/"+e),void 0)}function W(e,t){return{contract:e.contract,changes:new Set(e.changes??[]),flags:new Set(e.flags??[]),capabilities:e.capabilities??{},capBudgets:e.capBudgets??{},transforms:new Map,shellOrigin:t,mount:G,pipe:()=>({wrap:(r,n)=>(...s)=>{try{return n(...s)}catch(a){return Promise.reject(a)}}})}}var P=null,b=null;function $(e,t,r){try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(e,t,{value:r,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var B=!1;function ke(e,t){const r=[];for(const n of e.elements){const s=document.querySelector(`[data-id="${n.target}"]`);if(!s){d.post({__frame_patch_miss:{seq:e.seq}},t);return}if([...Object.keys(n.attrsSet??{}),...n.attrsRemoved??[]].some(a=>!ee(a))){d.post({__frame_patch_miss:{seq:e.seq}},t);return}if(n.text!==void 0&&(!oe(s)||ae(s))){d.post({__frame_patch_miss:{seq:e.seq}},t);return}for(const[a,u]of Object.entries(n.attrsSet??{}))if(!Y(s,a)){try{s.setAttribute(a,u)}catch{}K(s,a,u)}for(const a of n.attrsRemoved??[])Y(s,a)||(s.removeAttribute(a),K(s,a,null));typeof n.text=="string"&&(s.textContent=n.text),r.push(n.target)}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:e.seq,targets:r}}))}catch{}}function K(e,t,r){if(!(e instanceof HTMLInputElement))return;const n=t.toLowerCase();n==="checked"?e.checked=r!==null:n==="value"&&e.type!=="file"&&(e.value=r??"")}function Y(e,t){const r=t.toLowerCase(),n=e;return r==="data-id"||(r==="value"||r==="checked")&&(n.__artifactSecret===!0||/^(password|hidden|file)$/.test(n.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${e.getAttribute("autocomplete")??""} ${n.autocomplete??""}`))}function X(e){const t=document.documentElement;e==="light"||e==="dark"?(t.dataset.theme=e,t.style.colorScheme=e,B=!0):B&&(delete t.dataset.theme,t.style.colorScheme="",B=!1)}var M=new Map;function Te(){let e;const t={u:new Promise(r=>{e=r}),r:r=>{t.done=!0,e(r)},done:!1,nulled:!1};return t}function U(){for(const e of M.values())e.done||(e.nulled=!0,e.r(null))}var Le=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),G=(e,t)=>{const r=M.get(e);if(!r||r.done){r?.nulled&&b&&d.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:e}},b);return}const n=typeof t=="function"?Object.setPrototypeOf(t,Le):Object.assign(Object.create(null),t);typeof n.then=="function"&&delete n.then,r.r(Object.freeze(n))};function V(){const e=H?.value??{};$(window,"claude",e);for(const t of Object.keys(L)){if(e[t]!==void 0){$(e,t,e[t]);continue}M.set(t,Te())}if(e.use===void 0){const t=r=>{if(typeof r!="string"||!Object.hasOwn(L,r))return Promise.resolve(null);const n=M.get(r);return n?n.u:Promise.resolve(e[r]??null)};try{Object.defineProperty(e,"use",{value:t,writable:!0,configurable:!0,enumerable:!1})}catch{}}}if(T==="framed"){const e=j&&g.test(j)?A(j).catch(()=>{}):Promise.resolve(void 0),t=o=>{if(o.type==="auxclick"&&o.button!==1)return;const p=o.target,_=p&&p.closest?p.closest("a[href],area[href]"):null;if(!_)return;const w=_.getAttribute("href");if(!w)return;let i;try{i=new URL(w,document.baseURI)}catch{return}if((i.protocol==="http:"||i.protocol==="https:")&&i.origin!==location.origin){o.preventDefault();const m=(_.getAttribute("target")??"").toLowerCase(),l=o.type==="auxclick"||o.metaKey||o.ctrlKey||o.shiftKey||o.altKey||!["","_self","_top","_parent"].includes(m);d.post({__frame_nav:!0,url:i.href,newTab:l},"*")}};addEventListener("click",t,!0),addEventListener("auxclick",t,!0);const r={},n=o=>{o.isTrusted&&(r.pointer=!0)},s=o=>{o.isTrusted&&(r.click=!0)};addEventListener("pointermove",n,{capture:!0,passive:!0}),addEventListener("click",s,{capture:!0,passive:!0}),e.then(o=>{o?.wireNav&&(o.wireNav(),removeEventListener("click",t,!0),removeEventListener("auxclick",t,!0),removeEventListener("pointermove",n,!0),removeEventListener("click",s,!0),o.wireEngagement?.(r))});let a=null;try{a=be()}catch{}V();let u=null,f=null,R=0;const v=d.on((o,p)=>{q(p)&&ue(o)&&(u=o.__frame_init,b=p,v(),clearTimeout(R),f?.())});d.post({__frame_connect:!0},"*");const S=new Promise(o=>{f=o,R=setTimeout(()=>{v(),o()},Re)}),h=document.readyState==="loading"?new Promise(o=>document.addEventListener("DOMContentLoaded",()=>o(),{once:!0})):Promise.resolve();h.then(()=>{try{a?.restore()}catch{}});const y={cb:null};d.on((o,p)=>{if(q(p)&&fe(o)){try{a?.promoted()}catch{}y.cb?.()}}),S.then(async()=>{if(!u||!b){U();return}X(u.theme);const o=b;let p=!1,_=!1;d.on((c,D)=>{if(D!==o)return;pe(c)&&X(c.__frame_theme.theme),le(c)&&ke(c.__frame_patch,o);const E=c?.__fc_mode;E&&typeof E=="object"&&!p&&N&&g.test(N)&&(p=!0,A(N).then(F=>F.install?.(o,E.on===!0)).catch(()=>{}));const x=c?.__ft_cmd;x&&typeof x=="object"&&!_&&I&&g.test(I)&&(_=!0,A(I).then(F=>F.install?.(o,x)).catch(()=>{}))});const w=Object.keys(u.capabilities??{}).filter(c=>Object.hasOwn(L,c)).map(c=>[c,L[c]]).filter(c=>typeof c[1]=="string"&&g.test(c[1])),i=await Promise.allSettled(w.map(([,c])=>A(c))),m=await e,l=b;if(m?.buildBoot||d.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},l),m?.buildBoot)try{P=m.buildBoot(u,m.TRANSFORMS??{},{shellOrigin:l,mount:G},c=>d.post({__frame_cap_telemetry:c},l))}catch{d.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:"_transforms"}},l),P=W(u,l)}else P=W(u,l);const k=c=>d.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:c}},l),Pe=P;i.forEach((c,D)=>{const E=w[D][0];if(c.status!=="fulfilled"){k(E);return}try{c.value?.install?.(Pe)}catch{k(E)}}),U(),await h,d.post({__frame_ready:!0},b),e.then(c=>c?.installSizeReporter?.(l,y))})}else C&&(V(),Ee(C,A,U))})();</script><!-- /frame-runtime --><meta charset="utf8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}</style></head><body>
+<title>Hyprland Keyboard Shortcuts</title>
+<style>
+  :root {
+    --bg: #eef2f5;
+    --surface: #ffffff;
+    --surface-2: #e4e9ed;
+    --text: #12181c;
+    --text-muted: #57626b;
+    --border: #d7dee3;
+    --accent: #2b6a8f;
+    --accent-soft: #dbeaf5;
+    --accent2: #6c5a96;
+    --kbd-bg: #ffffff;
+    --kbd-border: #c7cfd5;
+    --kbd-text: #263038;
+    --kbd-shadow: rgba(18, 24, 28, 0.16);
+    --new-tag-bg: #e4d9f3;
+    --new-tag-text: #56417d;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101417;
+      --surface: #171c20;
+      --surface-2: #1b2125;
+      --text: #dfe3e7;
+      --text-muted: #8b9198;
+      --border: #262d32;
+      --accent: #93cdf6;
+      --accent-soft: rgba(147, 205, 246, 0.12);
+      --accent2: #cdc0e9;
+      --kbd-bg: #1d2327;
+      --kbd-border: #323b41;
+      --kbd-text: #dfe3e7;
+      --kbd-shadow: rgba(0, 0, 0, 0.5);
+      --new-tag-bg: rgba(205, 192, 233, 0.16);
+      --new-tag-text: #cdc0e9;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #101417;
+    --surface: #171c20;
+    --surface-2: #1b2125;
+    --text: #dfe3e7;
+    --text-muted: #8b9198;
+    --border: #262d32;
+    --accent: #93cdf6;
+    --accent-soft: rgba(147, 205, 246, 0.12);
+    --accent2: #cdc0e9;
+    --kbd-bg: #1d2327;
+    --kbd-border: #323b41;
+    --kbd-text: #dfe3e7;
+    --kbd-shadow: rgba(0, 0, 0, 0.5);
+    --new-tag-bg: rgba(205, 192, 233, 0.16);
+    --new-tag-text: #cdc0e9;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    margin: 0;
+    padding: 48px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  header.top {
+    margin-bottom: 32px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 62ch;
+    margin: 0 0 22px;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-muted);
+    padding: 12px 16px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 22px;
+  }
+  .legend b { color: var(--text); font-weight: 600; }
+
+  .searchbar {
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .searchbar input {
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 15px;
+    padding: 12px 14px 12px 38px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+  }
+  .searchbar input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .searchbar svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    stroke: var(--text-muted);
+    pointer-events: none;
+  }
+  .result-count {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 8px 2px 28px;
+  }
+
+  section.category {
+    margin-bottom: 26px;
+  }
+  section.category.hidden { display: none; }
+
+  .category h2 {
+    font-size: 13px;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin: 0 0 10px;
+    padding-left: 2px;
+  }
+
+  .rows {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .row:last-child { border-bottom: none; }
+  .row.hidden { display: none; }
+  .row.is-new {
+    background: linear-gradient(90deg, var(--accent-soft), transparent 60%);
+  }
+  .row.is-new::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent2);
+  }
+
+  .desc {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .desc .hint {
+    display: block;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .new-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: var(--new-tag-bg);
+    color: var(--new-tag-text);
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .combo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+  .combo .plus {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+  kbd {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--kbd-text);
+    background: var(--kbd-bg);
+    border: 1px solid var(--kbd-border);
+    border-radius: 6px;
+    padding: 4px 8px;
+    box-shadow: 0 1px 0 var(--kbd-shadow);
+    white-space: nowrap;
+  }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+  footer code {
+    font-family: var(--mono);
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 560px) {
+    .row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .combo { flex-wrap: wrap; }
+  }
+</style>
+
+<div class="page">
+  <header class="top">
+    <p class="eyebrow">yahya · Hyprland / ML4W</p>
+    <h1>Keyboard Shortcuts</h1>
+    <p class="subtitle">Every bind currently active in your Hyprland config — ML4W defaults plus your custom additions. Type below to filter.</p>
+    <div class="legend">
+      <span><b>Super</b> = Windows key</span>
+      <span><b>Primary monitor</b> = DP-2 (workspaces 1–10)</span>
+      <span><b>Secondary monitor</b> = DP-3 (workspace 11, extension)</span>
+    </div>
+  </header>
+
+  <div class="searchbar">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input id="search" type="text" placeholder="Filter shortcuts… (e.g. “monitor”, “screenshot”, “ctrl”)" autocomplete="off" data-ddg-inputtype="unknown">
+  </div>
+  <p class="result-count" id="count">73 shortcuts</p>
+
+  <main id="categories"><section class="category" data-cat="0"><h2>Launch apps</h2><div class="rows"><div class="row" data-search="launch apps open terminal super enter kitty"><div class="desc">Open terminal<span class="hint">kitty</span></div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Enter</kbd></div></div><div class="row" data-search="launch apps open application launcher super ctrl enter "><div class="desc">Open application launcher</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Enter</kbd></div></div><div class="row" data-search="launch apps open application launcher super a custom launcher script"><div class="desc">Open application launcher<span class="hint">custom launcher script</span></div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>A</kbd></div></div><div class="row" data-search="launch apps open browser super b "><div class="desc">Open browser</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>B</kbd></div></div><div class="row" data-search="launch apps open firefox super ctrl f "><div class="desc">Open Firefox</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>F</kbd></div></div><div class="row" data-search="launch apps open file manager super e "><div class="desc">Open file manager</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>E</kbd></div></div><div class="row" data-search="launch apps open emoji picker super ctrl e "><div class="desc">Open emoji picker</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>E</kbd></div></div><div class="row" data-search="launch apps open calculator super c "><div class="desc">Open calculator</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>C</kbd></div></div><div class="row" data-search="launch apps open clipboard manager super v "><div class="desc">Open clipboard manager</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>V</kbd></div></div></div></section><section class="category" data-cat="1"><h2>Monitors &amp; focus</h2><div class="rows"><div class="row is-new" data-search="monitors &amp; focus move hovered window to secondary monitor shift 2 dp-3"><div class="desc">Move hovered window to secondary monitor<span class="new-tag">New</span><span class="hint">DP-3</span></div><div class="combo"><kbd>Shift</kbd><span class="plus">+</span><kbd>2</kbd></div></div><div class="row is-new" data-search="monitors &amp; focus move hovered window to primary monitor shift 1 dp-2"><div class="desc">Move hovered window to primary monitor<span class="new-tag">New</span><span class="hint">DP-2</span></div><div class="combo"><kbd>Shift</kbd><span class="plus">+</span><kbd>1</kbd></div></div><div class="row is-new" data-search="monitors &amp; focus focus the other monitor ctrl shift tab toggles between dp-2 and dp-3"><div class="desc">Focus the other monitor<span class="new-tag">New</span><span class="hint">toggles between DP-2 and DP-3</span></div><div class="combo"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>Tab</kbd></div></div><div class="row is-new" data-search="monitors &amp; focus focus next window in current workspace shift tab "><div class="desc">Focus next window in current workspace<span class="new-tag">New</span></div><div class="combo"><kbd>Shift</kbd><span class="plus">+</span><kbd>Tab</kbd></div></div><div class="row" data-search="monitors &amp; focus move focus in direction super ←/→/↑/↓ "><div class="desc">Move focus in direction</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>←/→/↑/↓</kbd></div></div><div class="row" data-search="monitors &amp; focus switch to next / previous workspace super scroll "><div class="desc">Switch to next / previous workspace</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Scroll</kbd></div></div></div></section><section class="category" data-cat="2"><h2>Workspaces</h2><div class="rows"><div class="row" data-search="workspaces focus workspace 1–10 super 1–0 "><div class="desc">Focus workspace 1–10</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>1–0</kbd></div></div><div class="row" data-search="workspaces focus workspace 1–10 ctrl 1–0 always targets the primary monitor"><div class="desc">Focus workspace 1–10<span class="hint">always targets the primary monitor</span></div><div class="combo"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>1–0</kbd></div></div><div class="row" data-search="workspaces move window to workspace 1–10 super shift 1–0 "><div class="desc">Move window to workspace 1–10</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>1–0</kbd></div></div><div class="row" data-search="workspaces move window to workspace 1–10 ctrl shift 1–0 always targets the primary monitor"><div class="desc">Move window to workspace 1–10<span class="hint">always targets the primary monitor</span></div><div class="combo"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>1–0</kbd></div></div><div class="row" data-search="workspaces toggle scratchpad (special workspace) super s "><div class="desc">Toggle scratchpad (special workspace)</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>S</kbd></div></div><div class="row" data-search="workspaces send active window to scratchpad super shift s "><div class="desc">Send active window to scratchpad</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>S</kbd></div></div></div></section><section class="category" data-cat="3"><h2>Window management</h2><div class="rows"><div class="row" data-search="window management kill active window super q "><div class="desc">Kill active window</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Q</kbd></div></div><div class="row" data-search="window management quit active window and all its instances super shift q "><div class="desc">Quit active window and all its instances</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>Q</kbd></div></div><div class="row" data-search="window management close hovered window ctrl escape "><div class="desc">Close hovered window</div><div class="combo"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Escape</kbd></div></div><div class="row" data-search="window management toggle fullscreen super f "><div class="desc">Toggle fullscreen</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>F</kbd></div></div><div class="row" data-search="window management toggle maximize super m "><div class="desc">Toggle maximize</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>M</kbd></div></div><div class="row" data-search="window management toggle floating super t "><div class="desc">Toggle floating</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>T</kbd></div></div><div class="row" data-search="window management toggle floating for every window in the workspace super shift t "><div class="desc">Toggle floating for every window in the workspace</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>T</kbd></div></div><div class="row" data-search="window management toggle floating + pinned super alt t "><div class="desc">Toggle floating + pinned</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Alt</kbd><span class="plus">+</span><kbd>T</kbd></div></div><div class="row" data-search="window management toggle split layout super j "><div class="desc">Toggle split layout</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>J</kbd></div></div><div class="row" data-search="window management swap split super k "><div class="desc">Swap split</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>K</kbd></div></div><div class="row" data-search="window management toggle window group super g "><div class="desc">Toggle window group</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>G</kbd></div></div><div class="row" data-search="window management resize window width super shift ←/→ "><div class="desc">Resize window width</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>←/→</kbd></div></div><div class="row" data-search="window management resize window height super shift ↑/↓ "><div class="desc">Resize window height</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>↑/↓</kbd></div></div><div class="row" data-search="window management swap tiled window in direction super alt ←/→/↑/↓ "><div class="desc">Swap tiled window in direction</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Alt</kbd><span class="plus">+</span><kbd>←/→/↑/↓</kbd></div></div><div class="row" data-search="window management move window with the mouse super drag lmb "><div class="desc">Move window with the mouse</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Drag LMB</kbd></div></div><div class="row" data-search="window management resize window with the mouse super drag rmb "><div class="desc">Resize window with the mouse</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Drag RMB</kbd></div></div></div></section><section class="category" data-cat="4"><h2>Screenshots &amp; capture</h2><div class="rows"><div class="row" data-search="screenshots &amp; capture take a screenshot print "><div class="desc">Take a screenshot</div><div class="combo"><kbd>Print</kbd></div></div><div class="row" data-search="screenshots &amp; capture instant full-screen screenshot super alt f "><div class="desc">Instant full-screen screenshot</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Alt</kbd><span class="plus">+</span><kbd>F</kbd></div></div><div class="row" data-search="screenshots &amp; capture instant area screenshot super alt s "><div class="desc">Instant area screenshot</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Alt</kbd><span class="plus">+</span><kbd>S</kbd></div></div><div class="row" data-search="screenshots &amp; capture extract text from an area super alt a ocr"><div class="desc">Extract text from an area<span class="hint">OCR</span></div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Alt</kbd><span class="plus">+</span><kbd>A</kbd></div></div></div></section><section class="category" data-cat="5"><h2>System &amp; ML4W</h2><div class="rows"><div class="row" data-search="system &amp; ml4w lock screen super l "><div class="desc">Lock screen</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>L</kbd></div></div><div class="row" data-search="system &amp; ml4w lock screen super ctrl l "><div class="desc">Lock screen</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>L</kbd></div></div><div class="row" data-search="system &amp; ml4w power menu super ctrl p "><div class="desc">Power menu</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>P</kbd></div></div><div class="row" data-search="system &amp; ml4w reload hyprland config super ctrl r "><div class="desc">Reload Hyprland config</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>R</kbd></div></div><div class="row" data-search="system &amp; ml4w reload hyprland config super shift r "><div class="desc">Reload Hyprland config</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>R</kbd></div></div><div class="row" data-search="system &amp; ml4w show keybindings super ctrl k "><div class="desc">Show keybindings</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>K</kbd></div></div><div class="row" data-search="system &amp; ml4w open select-window overview super tab "><div class="desc">Open select-window overview</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Tab</kbd></div></div><div class="row" data-search="system &amp; ml4w open theme switcher ctrl alt t "><div class="desc">Open theme switcher</div><div class="combo"><kbd>Ctrl</kbd><span class="plus">+</span><kbd>Alt</kbd><span class="plus">+</span><kbd>T</kbd></div></div><div class="row" data-search="system &amp; ml4w toggle animations super shift a "><div class="desc">Toggle animations</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>A</kbd></div></div><div class="row" data-search="system &amp; ml4w random wallpaper super shift w "><div class="desc">Random wallpaper</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>W</kbd></div></div><div class="row" data-search="system &amp; ml4w open wallpaper selector super ctrl w "><div class="desc">Open wallpaper selector</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>W</kbd></div></div><div class="row" data-search="system &amp; ml4w start random-wallpaper automation super alt w "><div class="desc">Start random-wallpaper automation</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Alt</kbd><span class="plus">+</span><kbd>W</kbd></div></div><div class="row" data-search="system &amp; ml4w reload status bar super shift b "><div class="desc">Reload status bar</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>B</kbd></div></div><div class="row" data-search="system &amp; ml4w toggle status bar super ctrl b "><div class="desc">Toggle status bar</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>B</kbd></div></div><div class="row" data-search="system &amp; ml4w reload dock super alt d "><div class="desc">Reload dock</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Alt</kbd><span class="plus">+</span><kbd>D</kbd></div></div><div class="row" data-search="system &amp; ml4w toggle dock super ctrl d "><div class="desc">Toggle dock</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>D</kbd></div></div><div class="row" data-search="system &amp; ml4w open waybar theme switcher super ctrl t "><div class="desc">Open waybar theme switcher</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>T</kbd></div></div><div class="row" data-search="system &amp; ml4w toggle light / dark mode super shift m "><div class="desc">Toggle light / dark mode</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>M</kbd></div></div><div class="row" data-search="system &amp; ml4w open ml4w sidebar widget super ctrl s "><div class="desc">Open ML4W sidebar widget</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>S</kbd></div></div><div class="row" data-search="system &amp; ml4w open ml4w calendar widget super ctrl c "><div class="desc">Open ML4W calendar widget</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Ctrl</kbd><span class="plus">+</span><kbd>C</kbd></div></div><div class="row" data-search="system &amp; ml4w expand status bar &amp; focus for keyboard nav super space "><div class="desc">Expand status bar &amp; focus for keyboard nav</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Space</kbd></div></div><div class="row" data-search="system &amp; ml4w toggle game mode super alt g "><div class="desc">Toggle game mode</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Alt</kbd><span class="plus">+</span><kbd>G</kbd></div></div><div class="row" data-search="system &amp; ml4w toggle hyprsunset (blue-light filter) super shift h "><div class="desc">Toggle Hyprsunset (blue-light filter)</div><div class="combo"><kbd>Super</kbd><span class="plus">+</span><kbd>Shift</kbd><span class="plus">+</span><kbd>H</kbd></div></div></div></section><section class="category" data-cat="6"><h2>Media keys</h2><div class="rows"><div class="row" data-search="media keys raise volume vol + "><div class="desc">Raise volume</div><div class="combo"><kbd>Vol +</kbd></div></div><div class="row" data-search="media keys lower volume vol − "><div class="desc">Lower volume</div><div class="combo"><kbd>Vol −</kbd></div></div><div class="row" data-search="media keys mute audio mute "><div class="desc">Mute audio</div><div class="combo"><kbd>Mute</kbd></div></div><div class="row" data-search="media keys mute microphone mic mute "><div class="desc">Mute microphone</div><div class="combo"><kbd>Mic Mute</kbd></div></div><div class="row" data-search="media keys increase brightness bright + "><div class="desc">Increase brightness</div><div class="combo"><kbd>Bright +</kbd></div></div><div class="row" data-search="media keys decrease brightness bright − "><div class="desc">Decrease brightness</div><div class="combo"><kbd>Bright −</kbd></div></div><div class="row" data-search="media keys next track next "><div class="desc">Next track</div><div class="combo"><kbd>Next</kbd></div></div><div class="row" data-search="media keys previous track prev "><div class="desc">Previous track</div><div class="combo"><kbd>Prev</kbd></div></div><div class="row" data-search="media keys play / pause play/pause "><div class="desc">Play / pause</div><div class="combo"><kbd>Play/Pause</kbd></div></div></div></section></main>
+
+  <footer>
+    Number-row combos (workspaces 1–10) use your AZERTY physical key positions, shown here as <code>1</code>–<code>0</code> for clarity —
+    the actual keysyms Hyprland matches are the French symbol row (<code>&amp;</code>, <code>é</code>, <code>"</code>, <code>'</code>, <code>(</code>, <code>-</code>, <code>è</code>, <code>_</code>, <code>ç</code>, <code>à</code>).
+    Rows marked <span class="new-tag">New</span> were added in your latest customization pass.
+  </footer>
+</div>
+
+<script>
+const DATA = [
+  {
+    name: "Launch apps",
+    items: [
+      { combo: ["Super", "Enter"], desc: "Open terminal", hint: "kitty" },
+      { combo: ["Super", "Ctrl", "Enter"], desc: "Open application launcher" },
+      { combo: ["Super", "A"], desc: "Open application launcher", hint: "custom launcher script" },
+      { combo: ["Super", "B"], desc: "Open browser" },
+      { combo: ["Super", "Ctrl", "F"], desc: "Open Firefox" },
+      { combo: ["Super", "E"], desc: "Open file manager" },
+      { combo: ["Super", "Ctrl", "E"], desc: "Open emoji picker" },
+      { combo: ["Super", "C"], desc: "Open calculator" },
+      { combo: ["Super", "V"], desc: "Open clipboard manager" },
+    ]
+  },
+  {
+    name: "Monitors & focus",
+    items: [
+      { combo: ["Shift", "2"], desc: "Move hovered window to secondary monitor", hint: "DP-3", isNew: true },
+      { combo: ["Shift", "1"], desc: "Move hovered window to primary monitor", hint: "DP-2", isNew: true },
+      { combo: ["Ctrl", "Shift", "Tab"], desc: "Focus the other monitor", hint: "toggles between DP-2 and DP-3", isNew: true },
+      { combo: ["Shift", "Tab"], desc: "Focus next window in current workspace", isNew: true },
+      { combo: ["Super", "←/→/↑/↓"], desc: "Move focus in direction" },
+      { combo: ["Super", "Scroll"], desc: "Switch to next / previous workspace" },
+    ]
+  },
+  {
+    name: "Workspaces",
+    items: [
+      { combo: ["Super", "1–0"], desc: "Focus workspace 1–10" },
+      { combo: ["Ctrl", "1–0"], desc: "Focus workspace 1–10", hint: "always targets the primary monitor" },
+      { combo: ["Super", "Shift", "1–0"], desc: "Move window to workspace 1–10" },
+      { combo: ["Ctrl", "Shift", "1–0"], desc: "Move window to workspace 1–10", hint: "always targets the primary monitor" },
+      { combo: ["Super", "S"], desc: "Toggle scratchpad (special workspace)" },
+      { combo: ["Super", "Shift", "S"], desc: "Send active window to scratchpad" },
+    ]
+  },
+  {
+    name: "Window management",
+    items: [
+      { combo: ["Super", "Q"], desc: "Kill active window" },
+      { combo: ["Super", "Shift", "Q"], desc: "Quit active window and all its instances" },
+      { combo: ["Ctrl", "Escape"], desc: "Close hovered window" },
+      { combo: ["Super", "F"], desc: "Toggle fullscreen" },
+      { combo: ["Super", "M"], desc: "Toggle maximize" },
+      { combo: ["Super", "T"], desc: "Toggle floating" },
+      { combo: ["Super", "Shift", "T"], desc: "Toggle floating for every window in the workspace" },
+      { combo: ["Super", "Alt", "T"], desc: "Toggle floating + pinned" },
+      { combo: ["Super", "J"], desc: "Toggle split layout" },
+      { combo: ["Super", "K"], desc: "Swap split" },
+      { combo: ["Super", "G"], desc: "Toggle window group" },
+      { combo: ["Super", "Shift", "←/→"], desc: "Resize window width" },
+      { combo: ["Super", "Shift", "↑/↓"], desc: "Resize window height" },
+      { combo: ["Super", "Alt", "←/→/↑/↓"], desc: "Swap tiled window in direction" },
+      { combo: ["Super", "Drag LMB"], desc: "Move window with the mouse" },
+      { combo: ["Super", "Drag RMB"], desc: "Resize window with the mouse" },
+    ]
+  },
+  {
+    name: "Screenshots & capture",
+    items: [
+      { combo: ["Print"], desc: "Take a screenshot" },
+      { combo: ["Super", "Alt", "F"], desc: "Instant full-screen screenshot" },
+      { combo: ["Super", "Alt", "S"], desc: "Instant area screenshot" },
+      { combo: ["Super", "Alt", "A"], desc: "Extract text from an area", hint: "OCR" },
+    ]
+  },
+  {
+    name: "System & ML4W",
+    items: [
+      { combo: ["Super", "L"], desc: "Lock screen" },
+      { combo: ["Super", "Ctrl", "L"], desc: "Lock screen" },
+      { combo: ["Super", "Ctrl", "P"], desc: "Power menu" },
+      { combo: ["Super", "Ctrl", "R"], desc: "Reload Hyprland config" },
+      { combo: ["Super", "Shift", "R"], desc: "Reload Hyprland config" },
+      { combo: ["Super", "Ctrl", "K"], desc: "Show keybindings" },
+      { combo: ["Super", "Tab"], desc: "Open select-window overview" },
+      { combo: ["Ctrl", "Alt", "T"], desc: "Open theme switcher" },
+      { combo: ["Super", "Shift", "A"], desc: "Toggle animations" },
+      { combo: ["Super", "Shift", "W"], desc: "Random wallpaper" },
+      { combo: ["Super", "Ctrl", "W"], desc: "Open wallpaper selector" },
+      { combo: ["Super", "Alt", "W"], desc: "Start random-wallpaper automation" },
+      { combo: ["Super", "Shift", "B"], desc: "Reload status bar" },
+      { combo: ["Super", "Ctrl", "B"], desc: "Toggle status bar" },
+      { combo: ["Super", "Alt", "D"], desc: "Reload dock" },
+      { combo: ["Super", "Ctrl", "D"], desc: "Toggle dock" },
+      { combo: ["Super", "Ctrl", "T"], desc: "Open waybar theme switcher" },
+      { combo: ["Super", "Shift", "M"], desc: "Toggle light / dark mode" },
+      { combo: ["Super", "Ctrl", "S"], desc: "Open ML4W sidebar widget" },
+      { combo: ["Super", "Ctrl", "C"], desc: "Open ML4W calendar widget" },
+      { combo: ["Super", "Space"], desc: "Expand status bar & focus for keyboard nav" },
+      { combo: ["Super", "Alt", "G"], desc: "Toggle game mode" },
+      { combo: ["Super", "Shift", "H"], desc: "Toggle Hyprsunset (blue-light filter)" },
+    ]
+  },
+  {
+    name: "Media keys",
+    items: [
+      { combo: ["Vol +"], desc: "Raise volume" },
+      { combo: ["Vol −"], desc: "Lower volume" },
+      { combo: ["Mute"], desc: "Mute audio" },
+      { combo: ["Mic Mute"], desc: "Mute microphone" },
+      { combo: ["Bright +"], desc: "Increase brightness" },
+      { combo: ["Bright −"], desc: "Decrease brightness" },
+      { combo: ["Next"], desc: "Next track" },
+      { combo: ["Prev"], desc: "Previous track" },
+      { combo: ["Play/Pause"], desc: "Play / pause" },
+    ]
+  },
+];
+
+const root = document.getElementById("categories");
+const countEl = document.getElementById("count");
+let totalRows = 0;
+
+DATA.forEach((cat, ci) => {
+  const section = document.createElement("section");
+  section.className = "category";
+  section.dataset.cat = ci;
+
+  const h2 = document.createElement("h2");
+  h2.textContent = cat.name;
+  section.appendChild(h2);
+
+  const rows = document.createElement("div");
+  rows.className = "rows";
+
+  cat.items.forEach(item => {
+    totalRows++;
+    const row = document.createElement("div");
+    row.className = "row" + (item.isNew ? " is-new" : "");
+    row.dataset.search = (cat.name + " " + item.desc + " " + item.combo.join(" ") + " " + (item.hint || "")).toLowerCase();
+
+    const desc = document.createElement("div");
+    desc.className = "desc";
+    desc.innerHTML = item.desc + (item.isNew ? '<span class="new-tag">New</span>' : "") +
+      (item.hint ? '<span class="hint">' + item.hint + '</span>' : "");
+
+    const combo = document.createElement("div");
+    combo.className = "combo";
+    item.combo.forEach((k, i) => {
+      if (i > 0) {
+        const plus = document.createElement("span");
+        plus.className = "plus";
+        plus.textContent = "+";
+        combo.appendChild(plus);
+      }
+      const kbd = document.createElement("kbd");
+      kbd.textContent = k;
+      combo.appendChild(kbd);
+    });
+
+    row.appendChild(desc);
+    row.appendChild(combo);
+    rows.appendChild(row);
+  });
+
+  section.appendChild(rows);
+  root.appendChild(section);
+});
+
+function updateCount(visible) {
+  countEl.textContent = visible === totalRows
+    ? totalRows + " shortcuts"
+    : visible + " of " + totalRows + " shortcuts";
+}
+updateCount(totalRows);
+
+document.getElementById("search").addEventListener("input", (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  let visible = 0;
+  document.querySelectorAll(".category").forEach(section => {
+    let anyVisible = false;
+    section.querySelectorAll(".row").forEach(row => {
+      const match = !q || row.dataset.search.includes(q);
+      row.classList.toggle("hidden", !match);
+      if (match) { anyVisible = true; visible++; }
+    });
+    section.classList.toggle("hidden", !anyVisible);
+  });
+  updateCount(visible);
+});
+</script>
+
+</body></html>
