@@ -11,6 +11,10 @@
 #   ./setup-new-pc.sh --phase NAME    run a single phase directly
 #
 # Phases, in the order you'd normally run them:
+#   install-arch     (bare metal only) partitions a disk and installs base
+#                    Arch via the official archinstall tool, if you're
+#                    running this from the Arch live ISO with nothing
+#                    installed yet. Skipped automatically otherwise.
 #   preflight        sanity checks, base tools
 #   remove-de        (optional, destructive) uninstall the current DE
 #   install-ml4w     official ML4W Hyprland + dotfiles install
@@ -54,6 +58,56 @@ confirm_typed() {
 
 hyprland_is_running() {
     pgrep -x Hyprland >/dev/null 2>&1
+}
+
+# ============================================================================
+# Phase: install-arch  (bare metal -> installed Arch base, via archinstall)
+# ============================================================================
+is_live_iso() {
+    [ -d /run/archiso ] || grep -qi "archiso" /proc/cmdline 2>/dev/null
+}
+
+phase_install_arch() {
+    heading "Install Arch Linux (archinstall)"
+
+    if ! is_live_iso; then
+        info "Not running from the Arch live ISO — Arch is presumably already"
+        info "installed on this machine. Skipping."
+        return 0
+    fi
+
+    if [ "$EUID" -ne 0 ]; then
+        err "Run this phase as root — that's the normal state on the live ISO."
+        return 1
+    fi
+
+    if ! command -v archinstall >/dev/null 2>&1; then
+        info "Installing archinstall..."
+        pacman -Sy --needed --noconfirm archinstall
+    fi
+
+    warn "About to launch archinstall — Arch Linux's own official guided installer."
+    warn "It will ask YOU to pick the target disk and show exactly what it's about"
+    warn "to wipe before doing anything irreversible. Nothing here pre-selects a"
+    warn "disk or answers that for you — that choice has to be a human's, on a"
+    warn "machine you can see."
+    warn "When it asks about additional packages, add 'git' so you can clone this"
+    warn "repo again after rebooting."
+    echo
+    if ! confirm "Continue to archinstall now?"; then
+        warn "Skipped. Run 'archinstall' yourself whenever you're ready, then come"
+        warn "back to this script (from the new install) to continue."
+        return 0
+    fi
+
+    archinstall
+    DID_INSTALL_ARCH=1
+
+    echo
+    ok "archinstall finished."
+    info "Reboot into the new system, log in as the user you created, get this"
+    info "script over there (e.g. 'git clone' this repo), and continue with:"
+    info "  ./setup-new-pc.sh"
 }
 
 # ============================================================================
@@ -154,38 +208,39 @@ phase_remove_de() {
 # ============================================================================
 # Phase: install-ml4w  (base Hyprland + ML4W dotfiles)
 # ============================================================================
+# The profile .dotinst URL below is the confirmed real file behind the
+# "com.ml4w.dotfiles.stable" profile (verified against its "id" field on
+# GitHub: mylinuxforwork/dotfiles, hyprland-dotfiles-stable.dotinst). Override
+# with ML4W_PROFILE_URL=... if you ever want a different profile.
+ML4W_PROFILE_URL="${ML4W_PROFILE_URL:-https://raw.githubusercontent.com/mylinuxforwork/dotfiles/master/hyprland-dotfiles-stable.dotinst}"
+
 phase_install_ml4w() {
     heading "Install Hyprland + ML4W dotfiles"
 
-    if [ -d "$HOME/.mydotfiles" ] && command -v Hyprland >/dev/null 2>&1; then
-        info "Hyprland and ~/.mydotfiles already present — skipping base install."
-        info "(Delete ~/.mydotfiles or re-run with --phase install-ml4w-force to redo it.)"
-    else
-        info "Running the official ML4W setup script..."
-        info "(from raw.githubusercontent.com/mylinuxforwork/dotfiles)"
-        bash -c "$(curl -fsSL https://raw.githubusercontent.com/mylinuxforwork/dotfiles/master/setup.sh)"
-    fi
+    export PATH="$HOME/.local/bin:$PATH"
 
-    echo
-    if ! command -v ml4w-dotfiles-installer >/dev/null 2>&1; then
-        err "ml4w-dotfiles-installer not found after setup — something went wrong above."
-        return 1
+    if command -v ml4w-dotfiles-installer >/dev/null 2>&1; then
+        info "ml4w-dotfiles-installer already installed — skipping."
+    else
+        info "Installing ml4w-dotfiles-installer (official method: clone + make install)..."
+        local tmp; tmp=$(mktemp -d)
+        git clone --depth=1 https://github.com/mylinuxforwork/ml4w-dotfiles-installer "$tmp/ml4w-dotfiles-installer"
+        (cd "$tmp/ml4w-dotfiles-installer" && make install)
+        rm -rf "$tmp"
+
+        if ! command -v ml4w-dotfiles-installer >/dev/null 2>&1; then
+            err "ml4w-dotfiles-installer still not found on PATH after install — check the output above."
+            return 1
+        fi
+        ok "ml4w-dotfiles-installer installed."
     fi
 
     if [ -d "$HOME/.mydotfiles/com.ml4w.dotfiles.stable" ]; then
         info "The 'com.ml4w.dotfiles.stable' profile is already installed — skipping."
     else
-        info "Now install the specific dotfiles profile (the theme/config bundle)."
-        info "Grab its install command from https://mylinuxforwork.github.io/dotfiles/"
-        info "(pick your profile there, e.g. com.ml4w.dotfiles.stable, and copy the URL"
-        info "it gives you for --install)."
-        read -r -p "Paste the profile URL for --install: " profile_url
-        if [ -z "$profile_url" ]; then
-            warn "No URL given — skipping profile install. Run this phase again once you have it:"
-            warn "  ml4w-dotfiles-installer --install <url>"
-            return 0
-        fi
-        ml4w-dotfiles-installer --install "$profile_url"
+        info "Installing the com.ml4w.dotfiles.stable profile — this pulls in Hyprland,"
+        info "hyprlock, quickshell, matugen, and everything else the profile depends on."
+        ml4w-dotfiles-installer --install "$ML4W_PROFILE_URL"
     fi
 
     ok "Base ML4W install complete. Reboot and log into Hyprland before the next phases."
@@ -866,6 +921,7 @@ QML_EOF
 # ============================================================================
 run_phase() {
     case "$1" in
+        install-arch)       phase_install_arch ;;
         preflight)          phase_preflight ;;
         remove-de)          phase_remove_de ;;
         install-ml4w)       phase_install_ml4w ;;
@@ -885,33 +941,44 @@ fi
 
 echo "${c_bold}setup-new-pc.sh${c_reset} — reproduce yahya's ML4W Hyprland desktop"
 echo
-echo "  1) Run everything (preflight -> remove-de -> install-ml4w -> install-packages -> dotfiles -> custom-config)"
-echo "  2) preflight only"
-echo "  3) remove-de only"
-echo "  4) install-ml4w only"
-echo "  5) install-packages only  (every pacman + AUR package from the source machine)"
-echo "  6) dotfiles only  (personal git identity)"
-echo "  7) custom-config only"
-echo "  8) sddm-theme only  (run this AFTER first reboot + login + wallpaper set)"
+echo "  1) Run everything (install-arch if needed -> preflight -> remove-de -> install-ml4w -> install-packages -> dotfiles -> custom-config)"
+echo "  2) install-arch only  (bare metal / live ISO -> installed Arch base)"
+echo "  3) preflight only"
+echo "  4) remove-de only"
+echo "  5) install-ml4w only"
+echo "  6) install-packages only  (every pacman + AUR package from the source machine)"
+echo "  7) dotfiles only  (personal git identity)"
+echo "  8) custom-config only"
+echo "  9) sddm-theme only  (run this AFTER first reboot + login + wallpaper set)"
 echo "  q) quit"
 echo
 read -r -p "Choice: " choice
 
+DID_INSTALL_ARCH=0
+
 case "$choice" in
     1)
+        phase_install_arch
+        if [ "${DID_INSTALL_ARCH:-0}" = "1" ]; then
+            echo
+            info "Arch is installed — reboot into it and re-run this script to continue"
+            info "(preflight -> remove-de -> install-ml4w -> install-packages -> dotfiles -> custom-config)."
+            exit 0
+        fi
         phase_preflight && phase_remove_de && phase_install_ml4w && phase_install_packages && phase_dotfiles && phase_custom_config
         echo
         ok "Core setup done."
         info "Reboot, log into Hyprland, set a wallpaper (Super+Ctrl+W), then run:"
         info "  $0 --phase sddm-theme"
         ;;
-    2) phase_preflight ;;
-    3) phase_remove_de ;;
-    4) phase_install_ml4w ;;
-    5) phase_install_packages ;;
-    6) phase_dotfiles ;;
-    7) phase_custom_config ;;
-    8) phase_sddm_theme ;;
+    2) phase_install_arch ;;
+    3) phase_preflight ;;
+    4) phase_remove_de ;;
+    5) phase_install_ml4w ;;
+    6) phase_install_packages ;;
+    7) phase_dotfiles ;;
+    8) phase_custom_config ;;
+    9) phase_sddm_theme ;;
     q|Q) exit 0 ;;
     *) err "Unknown choice." ;;
 esac
