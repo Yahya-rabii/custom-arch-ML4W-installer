@@ -10,6 +10,20 @@ keybindings/terminal/statusbar/login screen customizations on top.
 It's interactive and split into phases, so you can stop, reboot, and resume
 without redoing earlier work.
 
+> **New to this? Start with [BEGINNERS-GUIDE.md](BEGINNERS-GUIDE.md).** It covers
+> the whole path end to end — writing and verifying the bootable USB, disabling
+> Secure Boot, installing the base system, running each phase in order, and the
+> gotchas that aren't obvious (notably that this script never enables SDDM, so a
+> fresh install boots to a text prompt until you do it yourself).
+
+> **On EndeavourOS, CachyOS, Manjaro or another Arch derivative?** Use
+> [`setup-new-pc-eos.sh`](setup-new-pc-eos.sh) instead. It is byte-identical to
+> `setup-new-pc.sh` apart from one check: the original requires `ID=arch` in
+> `/etc/os-release`, but derivatives report their own `ID` with `ID_LIKE="arch"`
+> (EndeavourOS is `ID="endeavouros"`), so the original aborts on them with
+> *"This script only knows how to set things up on Arch Linux."* The `-eos`
+> variant accepts `ID_LIKE=arch` too. On plain Arch either script works.
+
 ## What you need in advance
 
 - A PC booted from the **Arch Linux install ISO**, with a working internet
